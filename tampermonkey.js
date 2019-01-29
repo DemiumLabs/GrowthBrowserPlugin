@@ -42,7 +42,7 @@
 
     ];
 
-    var passporterActive = "";
+    var ownerActive = "";
 
     var s_ajaxListener = new Object();
     s_ajaxListener.tempOpen = XMLHttpRequest.prototype.open;
@@ -85,12 +85,12 @@
   //  }
 
     function insertSelect(){
-        if(!document.getElementById('passporterTaxSelector')){
+        if(!document.getElementById('ownerTaxSelector')){
             let select = $('<select>')
-                .on('change',event=> passporterActive = select[0].value)
-                .attr('id','passporterTaxSelector')
+                .on('change',event=> ownerActive = select[0].value)
+                .attr('id','ownerTaxSelector')
                 .addClass('Di7vw').addClass('pbgfb').addClass('LWmhU')
-                .append($('<option>').text('select a passporter interest'))
+                .append($('<option>').text('select a owner interest'))
                 .appendTo($('div.MWDvN')[0]);
 
             taxes.map((tax)=>{select.append($('<option>').attr('value',tax.code).text(tax.code  + ' - ' + tax.option))});
@@ -112,17 +112,17 @@
                     $('<button>').addClass('_0mzm- sqdOP  L3NKy _4pI4F')
                         .attr('value',link)
                         .on('click',click)
-                        .text('add to ' + passporterActive).appendTo($('<li>').appendTo(list));
+                        .text('add to ' + ownerActive).appendTo($('<li>').appendTo(list));
                 },1);
             });
 
             function click(event){
 
                 event.preventDefault();
-                $(event.currentTarget).text('adding to ' + passporterActive);
+                $(event.currentTarget).text('adding to ' + ownerActive);
                 let data = {
                                    link:event.currentTarget.value,
-                                   passporterInterest:passporterActive
+                                   ownerInterest:ownerActive
 
                                };
 
@@ -138,10 +138,10 @@
 
                             $.ajax({
                                type: "POST",
-                               url: 'https://api.test.passporterapp.com/api/Taggers',
+                               url: 'https://api.test.ownerapp.com/api/Taggers',
                                data: JSON.stringify(data),
                                success: (result)=>{
-                                   $(event.currentTarget).text('added to ' + passporterActive);
+                                   $(event.currentTarget).text('added to ' + ownerActive);
                                    console.log(result);
                                },
                                dataType: 'json',
